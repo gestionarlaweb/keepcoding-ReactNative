@@ -9,8 +9,6 @@ class Detail extends React.Component {
             <View style= {styles.container}>
             <Text>Detail</Text>
         </View>
-
-           
         );
     }
 }

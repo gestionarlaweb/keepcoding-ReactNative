@@ -1,14 +1,15 @@
 
 import React, {Component} from 'react';
 import {Actions, Router, Scene, Stack} from 'react-native-router-flux';
-import {Home, Detail} from './src/components/pages';
+import {Splash, Home, Detail} from './src/components/pages';
 
 class App extends Component {
   render() {
     return (
       <Router>
         <Stack key="root">
-          <Scene key={'Home'} component={Home} title={'Título Home'}/>
+          <Scene key={'Splash'} component={Splash} title={'Splash Page Initial'} hideNavBar={true}/>
+          <Scene key={'Home'} component={Home} title={'Título Home'} hideNavBar={false}/>
           <Scene key={'Detail'} component={Detail} hideNavBar={false} />
         </Stack>
       </Router>
