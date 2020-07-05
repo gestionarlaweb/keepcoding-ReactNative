@@ -7,6 +7,10 @@ const instance = axios.create({
 });
 
 export const getHouses = () => {
-  const url = '/casas';
+  // Soccer
+  // const url = '/search/shows?q=soccer';
+
+  // Tv Video
+  const url = '/v1';
   return instance.get(url);
 };

@@ -17,8 +17,7 @@ class Home extends React.Component {
         try {
             const getHousesRes = await getHouses();
             console.log("getHousesRespuesta: ", getHousesRes);
-            // Guardar a una Lista
-            const list = getHousesRes.data.records;
+            const list = getHousesRes.data
             this.setState({list});
             // es lo mismo que
             // this.setState({list: list});
@@ -31,13 +30,11 @@ class Home extends React.Component {
         console.log('Mis state: ', this.state.list);
         return (
             <View style={styles.container}>
-
                 {this.state.list.map((v, i) => (
                     <Text key={`cell-${i}`} style={{marginVertical: 20, color: 'green'}}>
-                        {v.nombre}
+                        {v.title}
                     </Text>
                 ))}
-            
         </View>
         )
     }
@@ -46,4 +43,5 @@ export default Home;
 
 /*
 <Button title={'Navegar a Detail'} onPress={() => Actions.push('Detail', {title: 'Título'})}/>
+            
 */
