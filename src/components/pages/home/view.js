@@ -1,8 +1,8 @@
 import React from 'react';
-import { SafeAreaView, TouchableOpacity, View, Image, Button, Text, Alert, FlatList, Dimensions } from 'react-native';
+import { SafeAreaView, TouchableOpacity, View, Image, Button, Text, Alert, FlatList, Dimensions, RefreshControl } from 'react-native';
 import styles from './styles';
 import {Actions} from 'react-native-router-flux';
-import { getHouses } from '../../../api';
+import { getApi } from '../../../api';
 
 // Saber el width de la pantalla
 //const width = Dimensions.get('window').width;
@@ -17,20 +17,27 @@ class Home extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {list: []};
+        this.state = {list: [], loading: true};
     }
 
     // MONTAJE
-    async componentDidMount(){
+    componentDidMount(){
+
+        this._initList();
+    }
+
+    // Init GET Api
+
+    async _initList(){
         try {
-            const getHousesRes = await getHouses();
-            console.log("getHousesRespuesta: ", getHousesRes);
-            const list = getHousesRes.data
+            const getRes = await getApi();
+            console.log("getRespuesta: ", getRes);
+            const list = getRes.data
             this.setState({list});
             // es lo mismo que
             // this.setState({list: list});
         }catch (e) {
-            console.log('getHousesError: ', e);
+            console.log('getError: ', e);
             Alert.alert('Error', 'Ha ocurrido un error');
         }
     }
@@ -38,27 +45,16 @@ class Home extends React.Component {
     _renderItem = ({item}) => {
        
         return (
-
-            
             <TouchableOpacity onPress={()=> Alert.alert(`${item.title} pulsado`)}>  
                 <View>
                     <Text>{item.title}</Text>
                 </View>
                 <Image 
-                    source={{uri: item.thumbnail}} style={{width: 200}} 
-                    style={{width: '50%', height: '50%'}}
+                    source={{uri: item.thumbnail}} style={{width: 500}} 
+                    style={{width: '100%', height: '50%'}}
                 />
             </TouchableOpacity>
-
-            
         );
-            
-        
-            
-        
-        
-                
-                
             
             // Si quisieramos cargar una imagen
             // https://reactnative.dev/docs/image
@@ -89,22 +85,28 @@ class Home extends React.Component {
     render() {
         console.log('Mis state: ', this.state.list);
 
-        const { list } = this.state
+        const { list, loading } = this.state
         return (
-            <View style={styles.container}>
+            <SafeAreaView style={styles.container}>
                 <FlatList
                     data={list}
                     // si hubiese un id le pasaría esta línea, pero esta API no la tiene
                    // keyExtractor={(item, index) => `card-${item.id}`} 
                     // 2 columnas por cada fila
-                   //numColumns={2}
+                   numColumns={3}
                     //renderItem={({ item }) => (
                         // Aquí le paso la función _renderItem
                         renderItem={this._renderItem}
+                        
+                        refreshControl={
+                            <RefreshControl refreshing={loading} onRefresh={this._initList}>
+                                
+                            </RefreshControl>
+                        }
                     //)}
                     
                 />
-            </View>
+            </SafeAreaView>
         );
     }
 }

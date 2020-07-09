@@ -6,7 +6,7 @@ const instance = axios.create({
   headers: {'Content-Type': 'application/json'},
 });
 
-export const getHouses = () => {
+export const getApi = () => {
   // Soccer
   // const url = '/search/shows?q=soccer';
 
