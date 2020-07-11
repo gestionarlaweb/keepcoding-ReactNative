@@ -2,15 +2,15 @@ import React from 'react';
 import { SafeAreaView, TouchableOpacity, View, Image, Button, Text, Alert, FlatList, Dimensions, RefreshControl } from 'react-native';
 import styles from './styles';
 import {Actions} from 'react-native-router-flux';
-import { getApi } from '../../../api';
+import { getApi } from '../../../api_axios';
 
 // Saber el width de la pantalla
 //const width = Dimensions.get('window').width;
 //console.log('Width: ',width );
 
 // Saber las 4 propiedades
-const window = Dimensions.get('window');
-console.log('window', window);
+//const window = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 
 
 class Home extends React.Component {
@@ -20,91 +20,62 @@ class Home extends React.Component {
         this.state = {list: [], loading: true};
     }
 
-    // MONTAJE
     componentDidMount(){
-
         this._initList();
     }
 
     // Init GET Api
-
-    async _initList(){
+    _initList = async () => {
         try {
+            this.setState({loading: true});
             const getRes = await getApi();
-            console.log("getRespuesta: ", getRes);
+            //console.log("getRespuesta: ", getRes);
             const list = getRes.data
-            this.setState({list});
+            this.setState({list, loading: false});
             // es lo mismo que
             // this.setState({list: list});
         }catch (e) {
-            console.log('getError: ', e);
-            Alert.alert('Error', 'Ha ocurrido un error');
-        }
-    }
+            //console.log('getError: ', e);
+            this.setState({loading:false});
+                Alert.alert('Error', 'Ha ocurrido un error');
+            }
+    };
 
+    // 
     _renderItem = ({item}) => {
-       
-        return (
-            <TouchableOpacity onPress={()=> Alert.alert(`${item.title} pulsado`)}>  
+        return(
+            <TouchableOpacity onPress={()=> Alert.alert(`${item.name} pulsado`)}>  
                 <View>
-                    <Text>{item.title}</Text>
+                    <Text>{item.name}</Text>
                 </View>
-                <Image 
-                    source={{uri: item.thumbnail}} style={{width: 500}} 
-                    style={{width: '100%', height: '50%'}}
-                />
+                <View>
+                    <Image resizeMode={'cover'}
+                    source={{uri: item.img}}
+                    style={{width: width/2, height: height/2}}
+                    />
+                </View>
             </TouchableOpacity>
         );
-            
-            // Si quisieramos cargar una imagen
-            // https://reactnative.dev/docs/image
-
-            // Imagen Fija
-            /*
-
-            <View>
-                    <Text>{item.thumbnail}</Text>
-            </View>
-
-
-            <Image
-
-            <TouchableOpacity onPress={()=> Alert.alert(`${item.title} pulsado`)}>
-
-                style={styles.tinyLogo}
-                source={require('@expo/snack-static/react-native-logo.png')}
-            />
-            */
-           // Image API
-           //<Image 
-           //      source={{uri: item.thumbnail}} style={{width: 300}} 
-           //      style={{width: '50%', height: '50%'}}
-           // />;
     };
            
     render() {
-        console.log('Mis state: ', this.state.list);
-
-        const { list, loading } = this.state
+        const { list, loading } = this.state;
+        console.log('loading', loading);
         return (
             <SafeAreaView style={styles.container}>
                 <FlatList
                     data={list}
-                    // si hubiese un id le pasaría esta línea, pero esta API no la tiene
-                   // keyExtractor={(item, index) => `card-${item.id}`} 
-                    // 2 columnas por cada fila
-                   numColumns={3}
-                    //renderItem={({ item }) => (
-                        // Aquí le paso la función _renderItem
-                        renderItem={this._renderItem}
-                        
-                        refreshControl={
-                            <RefreshControl refreshing={loading} onRefresh={this._initList}>
-                                
-                            </RefreshControl>
-                        }
-                    //)}
-                    
+                    keyExtractor={(item, index) => `card-${item.char_id}`} 
+                    numColumns={2}
+                    // Aquí le paso la función _renderItem
+                    renderItem={this._renderItem}
+                    refreshControl= {
+                        <RefreshControl 
+                            colors={['white']}
+                            refreshing={loading} 
+                            onRefresh={this._initList} 
+                        />
+                    } 
                 />
             </SafeAreaView>
         );

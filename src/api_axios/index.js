@@ -11,6 +11,7 @@ export const getApi = () => {
   // const url = '/search/shows?q=soccer';
 
   // Tv Video
-  const url = '/v1';
+  //const url = '/v1';
+  const url = '/api/characters';
   return instance.get(url);
 };
