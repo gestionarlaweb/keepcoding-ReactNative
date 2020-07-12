@@ -3,20 +3,19 @@ import {StyleSheet} from 'react-native';
 import colors from '../../../assets/colors';
 
 export default StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: colors.lime,
-        alignItems: 'center',
-        justifyContent: 'center',
-        margin: 2,
-    },
-    listado: {
-        
-    },
-    nombreActor: {
-        fontSize: 16,
-        margin: 5,
-        textTransform: 'uppercase',
-    },
+  container: {
+    flex: 1,
+    backgroundColor: colors.black,
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 2,
+  },
+  listado: {},
+  nombreActor: {
+    color: 'white',
+    fontSize: 16,
+    margin: 5,
+    textTransform: 'uppercase',
+  },
 });
 // styles de HOME
