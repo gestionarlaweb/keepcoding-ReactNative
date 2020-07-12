@@ -83,7 +83,7 @@ class Home extends React.Component {
           renderItem={this._renderItem}
           refreshControl={
             <RefreshControl
-              colors={['white']}
+              tintColor={'white'}
               refreshing={loading}
               onRefresh={this._initList}
             />

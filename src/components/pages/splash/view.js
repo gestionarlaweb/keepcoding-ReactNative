@@ -1,24 +1,23 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import {View, Image} from 'react-native';
 import styles from './styles';
-import { Actions } from 'react-native-router-flux';
+import {Actions} from 'react-native-router-flux';
 
 class Splash extends React.Component {
-    
-    // AL MONTAR vete a la página principal HOME
-    componentDidMount() {
-        setTimeout(() => Actions.replace('Home'), 2000);
-    }
+  // AL MONTAR vete a la página principal HOME
+  componentDidMount() {
+    setTimeout(() => Actions.replace('Home'), 4000);
+  }
 
-    // RENDER
-    render() {
-        //return <View style={styles.container}/>
-        return (
-            <View style= {styles.container}>
-                <Text>SPLASH !</Text>
-            </View>
-        );
-    }
+  // RENDER
+  render() {
+    const image = require('../../../assets/img/portada.png');
+    return (
+      <View style={styles.container}>
+        <Image source={image} style={styles.image} />
+      </View>
+    );
+  }
 }
 
 export default Splash;
