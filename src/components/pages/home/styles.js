@@ -8,7 +8,15 @@ export default StyleSheet.create({
         backgroundColor: colors.lime,
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 5
+        margin: 2,
+    },
+    listado: {
+        
+    },
+    nombreActor: {
+        fontSize: 16,
+        margin: 5,
+        textTransform: 'uppercase',
     },
 });
 // styles de HOME

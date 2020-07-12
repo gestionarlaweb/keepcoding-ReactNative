@@ -2,7 +2,7 @@ import React from 'react';
 import { SafeAreaView, TouchableOpacity, View, Image, Button, Text, Alert, FlatList, Dimensions, RefreshControl } from 'react-native';
 import styles from './styles';
 import {Actions} from 'react-native-router-flux';
-import { getApi } from '../../../api_axios';
+import {getApi} from '../../../api_axios';
 
 // Saber el width de la pantalla
 //const width = Dimensions.get('window').width;
@@ -41,18 +41,22 @@ class Home extends React.Component {
             }
     };
 
+    // Al pulsar pasamos el nombre del presonaje
+    _onPress = (character) => (
+        Actions.push('Detail', {character, title: character.name})
+    );
+
     // 
     _renderItem = ({item}) => {
         return(
-            <TouchableOpacity onPress={()=> Alert.alert(`${item.name} pulsado`)}>  
+            <TouchableOpacity onPress={() => Actions.push('Detail', {title: item.name})}>  
                 <View>
-                    <Text>{item.name}</Text>
+                    <Text style={styles.nombreActor}>{item.name}</Text>
                 </View>
                 <View>
-                    <Image resizeMode={'cover'}
-                    source={{uri: item.img}}
-                    style={{width: width/2, height: height/2}}
-                    />
+                    <Image style={{width: width/2,height: height/3,}}
+                    resizeMode={'cover'}
+                    source={{uri: item.img}}/>
                 </View>
             </TouchableOpacity>
         );
@@ -63,7 +67,7 @@ class Home extends React.Component {
         console.log('loading', loading);
         return (
             <SafeAreaView style={styles.container}>
-                <FlatList
+                <FlatList style={styles.listado}
                     data={list}
                     keyExtractor={(item, index) => `card-${item.char_id}`} 
                     numColumns={2}

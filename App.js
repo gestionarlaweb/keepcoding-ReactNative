@@ -9,7 +9,7 @@ class App extends Component {
       <Router>
         <Stack key="root">
           <Scene key={'Splash'} component={Splash} title={'Splash Page Initial'} hideNavBar={true}/>
-          <Scene key={'Home'} component={Home} title={'Título Home'} hideNavBar={false}/>
+          <Scene key={'Home'} component={Home} title={'Home'} hideNavBar={false}/>
           <Scene key={'Detail'} component={Detail} hideNavBar={false} />
         </Stack>
       </Router>
