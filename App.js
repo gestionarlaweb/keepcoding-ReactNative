@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
-import {Actions, Router, Scene, Stack} from 'react-native-router-flux';
+import {Router, Scene, Stack} from 'react-native-router-flux';
 import {Splash, Home, Detail} from './src/components/pages';
 // Para el STATUS BAR
 import {StatusBar} from 'react-native';
+// Para REDUX
+import {Provider} from 'react-redux';
+import store from './src/config/redux';
 
 class App extends Component {
   constructor(props) {
@@ -13,23 +16,25 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
-        <Stack key="root">
-          <Scene
-            key={'Splash'}
-            component={Splash}
-            title={'Splash Page Initial'}
-            hideNavBar={true}
-          />
-          <Scene
-            key={'Home'}
-            component={Home}
-            title={'Home'}
-            hideNavBar={false}
-          />
-          <Scene key={'Detail'} component={Detail} hideNavBar={false} />
-        </Stack>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <Stack key="root">
+            <Scene
+              key={'Splash'}
+              component={Splash}
+              title={'Splash Page Initial'}
+              hideNavBar={true}
+            />
+            <Scene
+              key={'Home'}
+              component={Home}
+              title={'Home'}
+              hideNavBar={false}
+            />
+            <Scene key={'Detail'} component={Detail} hideNavBar={false} />
+          </Stack>
+        </Router>
+      </Provider>
     );
   }
 }

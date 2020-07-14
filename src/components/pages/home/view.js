@@ -94,10 +94,3 @@ class Home extends React.Component {
   }
 }
 export default Home;
-
-/*
-<Button title={'Navegar a Detail'} onPress={() => Actions.push('Detail', {title: 'Título'})}/>
- 
-<TouchableOpacity> Efecto pulsar boton
-SafeAreaView Para las imagenes que les da un mejor formato, les da un padding automático
-*/

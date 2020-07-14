@@ -10,7 +10,9 @@ export default StyleSheet.create({
     justifyContent: 'center',
     margin: 2,
   },
-  listado: {},
+  listado: {
+    //paddingVertical: 10,
+  },
   nombreActor: {
     color: 'white',
     fontSize: 16,
