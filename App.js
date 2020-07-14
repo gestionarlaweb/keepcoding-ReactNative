@@ -15,6 +15,9 @@ class App extends Component {
   }
 
   render() {
+    // REDUX !!!!!!
+    //console.log('STORE !!!:', store.getState());
+
     return (
       <Provider store={store}>
         <Router>

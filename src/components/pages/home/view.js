@@ -4,7 +4,6 @@ import {
   TouchableOpacity,
   View,
   Image,
-  Button,
   Text,
   Alert,
   FlatList,
@@ -30,7 +29,11 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    this._initList();
+    // Lo desabilito porque lo vamos a hacer con REDUX
+    //this._initList();
+
+    // REDUX
+    this.props.getActors();
   }
 
   // Init GET Api
@@ -70,13 +73,18 @@ class Home extends React.Component {
   };
 
   render() {
-    const {list, loading} = this.state;
-    console.log('loading', loading);
+    //const {list, loading} = this.state;
+    //console.log('loading', loading);
+    const {listadoActores, loading} = this.props;
+
+    console.log('Mis PROPS: ', this.props);
+
     return (
       <SafeAreaView style={styles.container}>
         <FlatList
           style={styles.listado}
-          data={list}
+          //data={list}
+          data={listadoActores} // REDUX
           keyExtractor={(item, index) => `card-${item.char_id}`}
           numColumns={2}
           // Aquí le paso la función _renderItem
