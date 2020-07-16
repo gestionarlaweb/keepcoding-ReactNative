@@ -41,7 +41,6 @@ class Home extends React.Component {
     try {
       this.setState({loading: true});
       const getRes = await getApi();
-      //console.log("getRespuesta: ", getRes);
       const list = getRes.data;
       this.setState({list, loading: false});
       // es lo mismo que
@@ -56,7 +55,7 @@ class Home extends React.Component {
   _renderItem = ({item}) => {
     return (
       <TouchableOpacity
-        // Al pulsar  Se lo paso todo a través del item y se paso al title solo el name
+        // Al pulsar  Se lo paso todo a través del item y le paso al title solo el name
         onPress={() => Actions.push('Detail', {item, title: item.name})}>
         <View>
           <Text style={styles.nombreActor}>{item.name}</Text>
@@ -93,7 +92,8 @@ class Home extends React.Component {
             <RefreshControl
               tintColor={'white'}
               refreshing={loading}
-              onRefresh={this._initList}
+              // onRefresh={this._initList}
+              onRefresh={this.props.getActors} // REDUX
             />
           }
         />

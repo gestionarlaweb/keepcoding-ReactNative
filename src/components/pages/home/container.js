@@ -3,7 +3,7 @@ import View from './view'; // Las clases siempre en Primera letra Mayúscula
 
 import {actorsActions} from '../../../redux/actors';
 
-// Recibo el ESTADO
+// Recibo el ESTADO, Leer
 const mapStateProps = state => {
   console.log('Estado entero de REDUX conn mapStateProps: ', state);
   return {
@@ -13,10 +13,11 @@ const mapStateProps = state => {
   };
 };
 
-// Cargo el LOADING
+// Cargo el LOADING, consumir o realizar acciones
 const mapDispatchToProps = dispatch => {
   return {
     //setActorsLoading: loading => dispatch(actorsActions.setLoading(loading)),
+    // Carga el listado de ACTORES
     getActors: () => dispatch(actorsActions.fetchActors()),
   };
 };

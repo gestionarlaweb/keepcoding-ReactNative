@@ -14,16 +14,16 @@ const initialState = {
 // Por convención metemos los datos por (payload.)
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case types.UPDATE_LIST:
+    case types.UPDATE_LIST: // REDUCER
       return {...state, list: action.payload.list};
     // return {...state}  Significa que todos los state (keys) se van ir pegando una a una
     // seria lo mismo que poner return { loading: state.loading, list: state.list, item: state.item}
 
-    case types.SET_LOADING:
+    case types.SET_LOADING: // REDUCER
       const newState = {...state, loading: action.payload.loading};
       return newState;
 
-    case types.SET_ITEM:
+    case types.SET_ITEM: // REDUCER
       return {...state, item: action.payload.item};
 
     default:
