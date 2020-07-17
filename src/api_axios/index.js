@@ -20,3 +20,8 @@ export const getApi = params => {
   return instance.get(url);
 };
 */
+
+export const postActor = data => {
+  const url = 'api/characters';
+  return instance.post(url, data);
+};

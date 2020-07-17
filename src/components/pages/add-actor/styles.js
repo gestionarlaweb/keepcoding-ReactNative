@@ -6,4 +6,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.main,
   },
+  input: {
+    marginTop: 20,
+    marginHorizontal: 20,
+  },
+  button: {marginTop: 20, marginHorizontal: 20},
 });
+
+export default styles;
