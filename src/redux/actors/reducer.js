@@ -6,6 +6,8 @@ const initialState = {
   loading: false,
   list: [],
   item: null,
+  // Para la paginación que empiece por la página 1
+  //page: 1,
 };
 
 // STATE es el estado actual del reducer lo inicializo con valores por defecto, (Keys)
@@ -25,6 +27,15 @@ const reducer = (state = initialState, action = {}) => {
 
     case types.SET_ITEM: // REDUCER
       return {...state, item: action.payload.item};
+
+    // Para la actualización de las páginas
+    /*
+      case types.UPDATE_PAGE: 
+      return {
+        ...state,
+        page: action.payload.page,
+      };
+      */
 
     default:
       return state; // Al inicio de la App nos devolerá el state vacio

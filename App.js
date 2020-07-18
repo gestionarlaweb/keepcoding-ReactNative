@@ -54,6 +54,7 @@ class App extends Component {
               navigationBarStyle={{backgroundColor: colors.navBar}}
               titleStyle={{color: colors.white}}
               backButtonTextStyle={{color: colors.white}}
+              backButtonTintColor={colors.white}
               title={'Crear actor'}
             />
           </Stack>

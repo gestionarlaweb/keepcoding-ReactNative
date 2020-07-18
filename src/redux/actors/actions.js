@@ -3,6 +3,24 @@ import * as api_axios from '../../api_axios';
 import {Alert} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
+// Para la paginación ...me pierdo en Video 6 -1h29'-
+/*
+const LIMIT = 6;
+const updatePage = page => {
+  const action = {
+    type: types.UPDATE_PAGE,
+    payload: {page: page},
+  };
+};
+export const initList = () => {
+  return (dispatch, getState) => {
+    dispatch(updateList([]));
+    dispatch(updatePage(1));
+    dispatch(fetchActors());
+  };
+};
+*/
+
 export function updateList(newList) {
   const action = {
     type: types.UPDATE_LIST,
@@ -34,6 +52,14 @@ export const fetchActors = () => {
   return async (dispatch, getState) => {
     try {
       dispatch(setLoading(true));
+
+      // Para la paginación
+      //const params = {
+      //  actor: item.char_id,
+      //  limit: LIMIT,
+      //  offset: LIMIT,
+      //};
+      //const getRes = await api_axios.getApi(params);
       const getRes = await api_axios.getApi();
       const list = getRes.data;
       dispatch(updateList(list));
@@ -46,7 +72,7 @@ export const fetchActors = () => {
 };
 
 export const postActor = data => {
-  return async (dispatch, getState) => {
+  return async dispatch => {
     try {
       dispatch(setLoading(true));
       //const postActorRes = await api_axios.postActor(data);
